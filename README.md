@@ -47,10 +47,6 @@ To install and run the Coding Challenge Discord Bot on your server, follow these
 - Python 3.6 or higher
 - discord.py library
 
-## Configuration
-
-No additional configuration is needed outside of setting the bot token in the script.
-
 ## Documentation
 
 Currently, the bot's documentation consists of the in-built help command which provides users with information on how to use the bot.
