@@ -33,7 +33,7 @@ class CustomHelpCommand(commands.HelpCommand):
 
 # Initialize the bot with the custom help command
 bot = commands.Bot(command_prefix="!", intents=discord.Intents.all(), help_command=CustomHelpCommand())
-BOT_TOKEN = "MTIyNDczNDA0NjUyNjExMTgzNA.GxXhiZ.fmkglcBeWwMCteP0t8SCZoo445YYInv5xYoTmI"
+BOT_TOKEN = "YOUR BOT TOKEN HERE"
 
 # Dictionaries to store current answers by channel
 current_answers = {}
@@ -76,10 +76,6 @@ async def on_ready():
 
     await channel.send(embed=embed)
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send("Pong!")
-
 @bot.command(brief="Get a new coding question", description="Get a new coding question to solve. You can specify the difficulty of the question by using !newquestion easy, !newquestion medium, or !newquestion hard. If you don't specify a difficulty, I will give you a random question.")
 async def newquestion(ctx, difficulty: str= None):
     global current_answers
@@ -95,7 +91,7 @@ async def newquestion(ctx, difficulty: str= None):
         question = random.choice(all_questions)
         difficulty = "random"
     
-    current_answers[ctx.channel.id] = question["answer"]  # Store answer by channel ID
+    current_answers[ctx.channel.id] = question["answer"]  # Store answer by channel ID to make sure users are able to 
     embed = discord.Embed(
         title=f"Here is a {difficulty} difficulty coding question for you to solve:",
         description= "Use `!check <answer>` to check your answer.\n\n" + question["question"],
@@ -104,15 +100,19 @@ async def newquestion(ctx, difficulty: str= None):
     await ctx.send(embed=embed)
 
 @bot.command()
-async def check(ctx, *, user_answer: str):  # '*' to consume entire message as 'user_answer'
+# '*' to consume entire message as 'user_answer'
+async def check(ctx, *, user_answer: str):  
     global current_answers
 
+    # set to lower case to make it case-insensitive
     correct_answer = current_answers.get(ctx.channel.id, "").strip().lower()
 
+    #base case check
     if not correct_answer:
         await ctx.send("There is no question to check. Use !newquestion to get a new question.")
         return
     
+    # if the users answer is correct we return a green embed
     if user_answer.strip().lower() == correct_answer:
         embed = discord.Embed(
             title="Coding Challenge Check",
@@ -121,6 +121,7 @@ async def check(ctx, *, user_answer: str):  # '*' to consume entire message as '
         )
         embed.set_footer(text="Congratulations! Your answer is correct.")
     else:
+        # if the users answer is incorrect we return a red embed
         embed = discord.Embed(
             title="Coding Challenge Check",
             description=f"Your answer: {user_answer}\nCorrect answer: {correct_answer}",

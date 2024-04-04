@@ -8,7 +8,7 @@ The Coding Challenge Discord Bot is designed to offer users a unique and interac
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Commands](#commands)
+- [Commands](#commands)
 - [Features](#features)
 - [Dependencies](#dependencies)
 - [Configuration](#configuration)
@@ -54,13 +54,13 @@ Currently, the bot's documentation consists of the in-built help command which p
 ## Examples
 
 1. **Getting a new question:**
-    ```
-    !newquestion medium
-    ```
+   ```
+   !newquestion medium
+   ```
 2. **Checking an answer:**
-    ```
-    !check 42
-    ```
+   ```
+   !check 42
+   ```
 
 ## Troubleshooting
 
